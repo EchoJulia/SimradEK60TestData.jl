@@ -1,8 +1,12 @@
 #!/usr/bin/env julia
 
-# Compare results from SimradEK60.jl to those from Echoview
+using SimradEK60TestData
+@static if VERSION < v"0.7.0-DEV.2005"
+    using Base.Test
+else
+    using Test
+end
 
-using Base.Test
 using SimradEK60
 using CSV
 using DataFrames
@@ -32,7 +36,7 @@ end
 
 @testset "all" begin
 
-    filename = "JR230-D20091215-T121917.raw"
+    filename = "../data/JR230-D20091215-T121917.raw"
 
     ps = collect(pings(filename))
     ps38 = [p for p in ps if p.frequency == 38000]
@@ -46,17 +50,17 @@ end
     Sv120 = Sv(ps120)[2:end,:]
     Sv200 = Sv(ps200)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-38-uncal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-38-uncal.sv.csv"
     A = load_echoview_matrix(filename)
 
     @test compare(A, Sv38)
 
-    filename = "JR230-D20091215-T121917-120-uncal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-120-uncal.sv.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, Sv120)
 
 
-    filename = "JR230-D20091215-T121917-200-uncal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-200-uncal.sv.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, Sv200)
 
@@ -64,15 +68,15 @@ end
     TS120 = TS(ps120)[2:end,:]
     TS200 = TS(ps200)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-38-uncal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-38-uncal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS38)
 
-    filename = "JR230-D20091215-T121917-120-uncal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-120-uncal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS120)
 
-    filename = "JR230-D20091215-T121917-200-uncal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-200-uncal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS200)
 
@@ -89,7 +93,7 @@ end
                  pulselength=0.001024,
                  sacorrection=0.12)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-38-cal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-38-cal.sv.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, Sv38cal)
 
@@ -103,7 +107,7 @@ end
                   pulselength=0.001024,
                   sacorrection=-0.05)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-120-cal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-120-cal.sv.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, Sv120cal)
 
@@ -117,7 +121,7 @@ end
                   pulselength=0.001024,
                   sacorrection=0.080)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-200-cal.sv.csv"
+    filename = "../data/JR230-D20091215-T121917-200-cal.sv.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, Sv200cal)
 
@@ -128,7 +132,7 @@ end
                  absorptioncoefficient=0.001014,
                  transmitpower=2000.000002)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-38-cal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-38-cal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS38cal)
 
@@ -139,7 +143,7 @@ end
                   absorptioncoefficient=0.02683,
                   transmitpower=500.00000)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-120-cal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-120-cal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS120cal)
 
@@ -150,7 +154,7 @@ end
                   absorptioncoefficient=0.04023,
                   transmitpower=300.00000)[2:end,:]
 
-    filename = "JR230-D20091215-T121917-200-cal.ts.csv"
+    filename = "../data/JR230-D20091215-T121917-200-cal.ts.csv"
     A = load_echoview_matrix(filename)
     @test compare(A, TS200cal)
 
