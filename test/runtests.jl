@@ -8,8 +8,9 @@ else
 end
 
 using SimradEK60
-using CSV
+using CSVFiles
 using DataFrames
+
 
 function rmse(A, B)
     a = A .- B
@@ -25,11 +26,15 @@ end
 
 
 function load_echoview_matrix(filename)
-    df = CSV.read(filename,
-                  header=false,
-                  datarow=2)
 
-    A = transpose(get.(convert(Array,df[:, 14:end])))
+    df = CSVFiles.load(filename, header_exists=false,
+                       skiplines_begin=1) |> DataFrame
+
+    # df = CSV.read(filename,
+    #               header=false,
+    #               datarow=2)
+
+    A = transpose(convert(Array,df[:, 14:end]))
 
     A= Float64.(A)
 end
