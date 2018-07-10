@@ -163,4 +163,14 @@ end
     A = load_echoview_matrix(filename)
     @test compare(A, TS200cal)
 
+    # Test range for unequal ping lengths
+
+    filename = "../data/JR245-D20110116-T182142.raw"
+
+    ps = pings(filename) # Get the pings
+    ps38 = [p for p in ps if p.frequency == 38000] # Just 38 kHz pings
+
+    @test length(R(ps38)) == 5355 # not 5100 !
+
+    #
 end
