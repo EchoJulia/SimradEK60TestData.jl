@@ -170,7 +170,9 @@ end
     ps = pings(filename) # Get the pings
     ps38 = [p for p in ps if p.frequency == 38000] # Just 38 kHz pings
 
-    @test length(R(ps38)) == 5355 # not 5100 !
+    m, n = size(R(ps38))
+    @test m == 5355 # not 5100 !
+    @test n == 412
 
     #
 end
