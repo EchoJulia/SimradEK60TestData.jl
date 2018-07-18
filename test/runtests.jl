@@ -9,4 +9,5 @@ else
 end
 
 @test isfile(EK60_SAMPLE)
+@test isfile(ECS_SAMPLE)
 @test isfile(joinpath(EK60_DATA, "JR230.ecs"))
