@@ -1,4 +1,3 @@
-__precompile__()
 module SimradEK60TestData
 
 export EK60_DATA, EK60_SAMPLE, ECS_SAMPLE
