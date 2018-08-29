@@ -2,10 +2,6 @@
 
 [![Build Status](https://travis-ci.org/EchoJulia/SimradEK60TestData.jl.svg?branch=master)](https://travis-ci.org/EchoJulia/SimradEK60TestData.jl)
 
-[![Coverage Status](https://coveralls.io/repos/EchoJulia/SimradEK60TestData.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/EchoJulia/SimradEK60TestData.jl?branch=master)
-
-[![codecov.io](http://codecov.io/github/EchoJulia/SimradEK60TestData.jl/coverage.svg?branch=master)](http://codecov.io/github/EchoJulia/SimradEK60TestData.jl?branch=master)
-
 Sample Simrad EK60 scientific echosounder data for testing and
 demonstration purposes.
 
